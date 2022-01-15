@@ -1,5 +1,5 @@
 --- # Master Playbook for Web Servers
-- hosts: httpd
+- hosts: Test-LAMP
   gather_facts: yes
   roles:
     - httpd
