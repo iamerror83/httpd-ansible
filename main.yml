@@ -1,0 +1,29 @@
+- name: Install remi-repository
+  yum: pkg=https://rpms.remirepo.net/enterprise/remi-release-8.rpm state=latest disable_gpg_check=yes
+- name: Installing DNF-Utils
+  yum: pkg=dnf-utils state=latest
+- name: Enabling Remi Repositories
+  shell: dnf config-manager --set-enabled remi
+- name: Enabling remi-php 8.0
+  shell: dnf module install php:remi-8.0
+- name: Resetting PHP Module
+  shell: dnf module reset php -y
+- name: Install PHP and Apache
+  yum:
+    name: '{{ item }}'
+    state: present
+    update_cache: true
+  with_items:
+    - httpd
+    - php
+    - php-mysqlnd
+    - php-pho
+    - mod_ssl
+- shell: systemctl status httpd
+  register: result
+  until:  result.stdout.find("active (running)") != -1
+  retries: 5
+  delay: 5
+- debug: var=result
+  notify: Restart HTTPD
+  ignore_errors: yes
