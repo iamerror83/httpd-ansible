@@ -4,10 +4,10 @@
   yum: pkg=dnf-utils state=latest
 - name: Enabling Remi Repositories
   shell: dnf config-manager --set-enabled remi
-- name: Enabling remi-php 8.0
-  shell: dnf module install php:remi-8.0
 - name: Resetting PHP Module
   shell: dnf module reset php -y
+- name: Enabling remi-php 8.0
+  shell: dnf module install php:remi-8.0
 - name: Install PHP and Apache
   yum:
     name: '{{ item }}'
@@ -15,7 +15,6 @@
     update_cache: true
   with_items:
     - httpd
-    - php
     - php-mysqlnd
     - php-pho
     - mod_ssl
