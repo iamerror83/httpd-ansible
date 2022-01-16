@@ -1,3 +1,11 @@
+- name: Install remi-repository
+  yum: pkg=https://rpms.remirepo.net/enterprise/remi-release-8.rpm state=latest
+- name: Installing DNF-Utils
+  yum: pkg=dnf-utils state=latest
+- name: Enabling Remi Repositories
+  shell: dnf config-manager --set-enabled remi
+- name: Enabling remi-php 8.0
+  shell: dnf module install php:remi-8.0
 - name: Install Apache Web Server
   yum: pkg=httpd state=latest
 - shell: systemctl status httpd
