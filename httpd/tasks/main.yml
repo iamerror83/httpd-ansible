@@ -20,6 +20,5 @@
     update_cache: true
 - name: Enabling Apache at boot
   shell: systemctl enable httpd
-- debug: var=result
-  notify: Restart HTTPD
-  ignore_errors: yes
+- name: Starting Apache
+  shell: systemctl start httpd
