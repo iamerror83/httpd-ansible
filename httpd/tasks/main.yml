@@ -1,5 +1,5 @@
 - name: Install remi-repository
-  yum: pkg=https://rpms.remirepo.net/enterprise/remi-release-8.rpm state=latest
+  yum: pkg=https://rpms.remirepo.net/enterprise/remi-release-8.rpm state=latest disable_gpg_check=yes
 - name: Installing DNF-Utils
   yum: pkg=dnf-utils state=latest
 - name: Enabling Remi Repositories
