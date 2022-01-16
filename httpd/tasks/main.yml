@@ -12,13 +12,14 @@
   yum:
     name: httpd
     state: latest
-    enable: yes
     update_cache: true
 - name: Install PHP Packages
   yum:
     name: ['php-mysqlnd', 'mod_ssl']
     state: latest
     update_cache: true
+- name: Enabling Apache at boot
+  shell: systemctl enable httpd
 - debug: var=result
   notify: Restart HTTPD
   ignore_errors: yes
