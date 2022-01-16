@@ -10,14 +10,9 @@
   shell: dnf module install php:remi-8.0 -y
 - name: Install PHP and Apache
   yum:
-    name: '{{ item }}'
+    name: ['httpd', 'php-mysqlnd', 'mod_ssl']
     state: present
     update_cache: true
-  with_items:
-    - httpd
-    - php-mysqlnd
-    - php-pho
-    - mod_ssl
 - name: Restarting httpd
   shell: systemctl status httpd
   register: result
