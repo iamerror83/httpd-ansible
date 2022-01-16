@@ -1,6 +1,5 @@
 - name: Install Apache Web Server
-  yum: pkg={{ redhat_apache }} state=latest
-  when: "{{ redhat_os }}" 
+  yum: pkg=httpd state=latest
 - shell: systemctl status httpd
   register: result
   until:  result.stdout.find("active (running)") != -1
