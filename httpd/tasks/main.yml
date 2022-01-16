@@ -12,7 +12,7 @@
   yum:
     name: httpd
     state: latest
-    enabled: yes
+    enable: yes
     update_cache: true
 - name: Install PHP Packages
   yum:
