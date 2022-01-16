@@ -10,13 +10,15 @@
   shell: dnf module install php:remi-8.0 -y
 - name: Install PHP and Apache
   yum:
-    name: ['httpd', 'php-mysqlnd', 'mod_ssl']
-    state: present
+    name: httpd
+    state: latest
+    enabled: yes
     update_cache: true
-- name: Restarting httpd
-  shell: systemctl status httpd
-  register: result
-  until:  result.stdout.find("active (running)") != -1
+- name: Install PHP Packages
+  yum:
+    name: ['php-mysqlnd', 'mod_ssl']
+    state: latest
+    update_cache: true
 - debug: var=result
   notify: Restart HTTPD
   ignore_errors: yes
